@@ -1,7 +1,7 @@
 #![cfg_attr(feature = "nightly", deny(missing_docs))]
 #![cfg_attr(feature = "nightly", feature(external_doc))]
 #![cfg_attr(feature = "nightly", doc(include = "../README.md"))]
-// #![cfg_attr(test, deny(warnings))]
+#![cfg_attr(test, deny(warnings))]
 
 /// Operate on 16 u32 numbers to compute a full ChaCha cypher.
 ///
@@ -112,13 +112,9 @@ pub fn quarter_round(
 mod test {
   extern crate byteorder;
 
-  use self::byteorder::{ReadBytesExt, LE};
-  use std::io::Cursor;
-
-  use super::*;
-
   #[test]
   fn qround_test_vector() {
+    use super::*;
     let mut state = vec![
       0x879531e0, 0xc5ecf37d, 0x516461b1, 0xc9a62f8a, 0x44c20ef3, 0x3390af7f,
       0xd9fc690b, 0x2a5f714c, 0x53372767, 0xb00a5631, 0x974c541a, 0x359e9963,
@@ -138,6 +134,8 @@ mod test {
 
   #[test]
   fn quarter_round_test_vector() {
+    use super::*;
+
     let a = 0x11111111;
     let b = 0x01020304;
     let c = 0x9b8d6f43;
@@ -153,6 +151,8 @@ mod test {
 
   #[test]
   fn chacha20_block_test_vector() {
+    use super::*;
+
     let key: Vec<u8> = vec![
       0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b,
       0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
@@ -192,6 +192,9 @@ mod test {
     assert_eq!(res, expected, "block");
 
     fn to_u32(from: Vec<u8>) -> Vec<u32> {
+      use self::byteorder::{ReadBytesExt, LE};
+      use std::io::Cursor;
+
       let max = from.len() / 4;
 
       let mut state = Vec::with_capacity(max);
