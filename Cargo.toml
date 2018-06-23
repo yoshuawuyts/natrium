@@ -1,10 +1,10 @@
 [package]
-name = "chacha"
+name = "natrium"
 version = "0.1.0"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/yoshuawuyts/chacha"
-documentation = "https://docs.rs/chacha"
-description = "Chacha20 impl"
+repository = "https://github.com/yoshuawuyts/natrium"
+documentation = "https://docs.rs/natrium"
+description = "Cryptography lib"
 authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
 readme = "README.md"
 
