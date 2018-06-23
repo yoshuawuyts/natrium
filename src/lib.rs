@@ -112,6 +112,7 @@ pub fn quarter_round(
 mod test {
   extern crate byteorder;
 
+  // Follows the IETF spec test data.
   #[test]
   fn qround_test_vector() {
     use super::*;
@@ -132,6 +133,7 @@ mod test {
     assert_eq!(state, expected);
   }
 
+  // Follows the IETF spec test data.
   #[test]
   fn quarter_round_test_vector() {
     use super::*;
@@ -149,6 +151,7 @@ mod test {
     assert_eq!(d, 0x5881c4bb);
   }
 
+  // Follows the IETF spec test data.
   #[test]
   fn chacha20_block_test_vector() {
     use super::*;
