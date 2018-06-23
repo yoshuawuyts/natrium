@@ -9,5 +9,6 @@ authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
 readme = "README.md"
 
 [dependencies]
+byteorder = "1.2.3"
 
 [dev-dependencies]
