@@ -1,0 +1,13 @@
+[package]
+name = "chacha"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yoshuawuyts/chacha"
+documentation = "https://docs.rs/chacha"
+description = "Chacha20 impl"
+authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
+readme = "README.md"
+
+[dependencies]
+
+[dev-dependencies]
