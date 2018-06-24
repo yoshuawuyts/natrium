@@ -1,8 +1,3 @@
-#![cfg_attr(feature = "nightly", deny(missing_docs))]
-#![cfg_attr(feature = "nightly", feature(external_doc))]
-#![cfg_attr(feature = "nightly", doc(include = "../README.md"))]
-#![cfg_attr(test, deny(warnings))]
-
 /// Operate on 16 u32 numbers to compute a full ChaCha cypher.
 ///
 /// The internal state is a vector of 16 u32s laid out in memory as:
