@@ -51,7 +51,7 @@ fn setup_state(key: &[u32], nonce: &[u32], block_count: u32) -> Vec<u32> {
 }
 
 #[inline]
-fn chacha20_rot(state: &Vec<u32>) -> Vec<u32>{
+fn chacha20_rot(state: &Vec<u32>) -> Vec<u32> {
   let mut working_state = state.clone();
   for _ in 0..10 {
     qround(&mut working_state, 0, 4, 8, 12);
