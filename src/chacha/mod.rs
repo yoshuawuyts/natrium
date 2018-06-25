@@ -1,3 +1,7 @@
+mod key;
+
+pub use self::key::Key;
+
 /// Operate on 16 u32 numbers to compute a full ChaCha cypher.
 ///
 /// The internal state is a vector of 16 u32s laid out in memory as:

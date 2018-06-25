@@ -3,4 +3,6 @@
 #![cfg_attr(feature = "nightly", doc(include = "../README.md"))]
 #![cfg_attr(test, deny(warnings))]
 
+extern crate byteorder;
+
 pub mod chacha;
