@@ -1,5 +1,6 @@
-use byteorder::{ReadBytesExt, LE};
+use byteorder::{ReadBytesExt, WriteBytesExt, LE};
 use std::io::Cursor;
+use Result;
 
 /// ChaCha key.
 #[derive(Debug, Clone)]
@@ -8,16 +9,25 @@ pub struct Key {
 }
 
 impl Key {
-  /// Create a new instance bytes a byte slice.
-  pub fn from_bytes(bytes: &[u8]) -> Self {
+  /// Create a new instance from a byte slice.
+  pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
     let max = bytes.len() / 4;
 
     let mut key = Vec::with_capacity(max);
     let mut reader = Cursor::new(bytes);
     for _ in 0..max {
-      let byte = reader.read_u32::<LE>().unwrap();
+      let byte = reader.read_u32::<LE>().expect("Error writing key");
       key.push(byte);
     }
-    Self { key }
+    Ok(Self { key })
+  }
+
+  /// Convert into a byte slice.
+  pub fn as_bytes(&self) -> Vec<u8> {
+    let mut bytes = Vec::with_capacity(self.key.len() * 4);
+    for num in &self.key {
+      bytes.write_u32::<LE>(*num).expect("Error converting key");
+    }
+    bytes
   }
 }
