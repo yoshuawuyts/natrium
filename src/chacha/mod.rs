@@ -1,3 +1,10 @@
+//! ChaCha20 stream cipher.
+//!
+//! The ChaCha20 cipher is a high-speed cipher.  It is considerably faster than
+//! AES in software-only implementations, making it around three times as fast
+//! on platforms that lack specialized AES hardware. ChaCha20 is also not
+//! sensitive to timing attacks.
+
 mod key;
 
 pub use self::key::Key;
