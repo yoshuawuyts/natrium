@@ -22,12 +22,7 @@ pub use self::key::Key;
 /// ```
 // Each value must be little-endian.
 #[inline]
-pub fn chacha20_block(
-  key: &[u32],
-  nonce: &[u32],
-  block_count: u32,
-) -> Vec<u32> {
-  assert_eq!(key.len(), 8);
+pub fn chacha20_block(key: &Key, nonce: &[u32], block_count: u32) -> Vec<u32> {
   assert_eq!(nonce.len(), 3);
 
   let mut state = setup_state(key, nonce, block_count);
@@ -42,7 +37,7 @@ pub fn chacha20_block(
 
 /// Initialize the chacha state.
 #[inline]
-pub fn setup_state(key: &[u32], nonce: &[u32], block_count: u32) -> Vec<u32> {
+pub fn setup_state(key: &Key, nonce: &[u32], block_count: u32) -> Vec<u32> {
   let mut state: Vec<u32> = Vec::with_capacity(16);
 
   state.push(0x61707865_u32);
@@ -50,7 +45,7 @@ pub fn setup_state(key: &[u32], nonce: &[u32], block_count: u32) -> Vec<u32> {
   state.push(0x79622d32_u32);
   state.push(0x6b206574_u32);
 
-  state.extend_from_slice(key);
+  state.extend_from_slice(key.key());
   state.push(block_count);
   state.extend_from_slice(nonce);
 

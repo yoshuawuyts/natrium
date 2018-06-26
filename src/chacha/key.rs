@@ -1,4 +1,5 @@
 use byteorder::{ReadBytesExt, WriteBytesExt, LE};
+use std::convert::AsRef;
 use std::io::Cursor;
 use Result;
 
@@ -10,7 +11,8 @@ pub struct Key {
 
 impl Key {
   /// Create a new instance from a byte slice.
-  pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
+  pub fn from_bytes(bytes: impl AsRef<Vec<u8>>) -> Result<Self> {
+    let bytes = bytes.as_ref();
     let max = bytes.len() / 4;
 
     let mut key = Vec::with_capacity(max);
@@ -29,5 +31,11 @@ impl Key {
       bytes.write_u32::<LE>(*num).expect("Error converting key");
     }
     bytes
+  }
+
+  /// Get the key.
+  #[inline]
+  pub fn key(&self) -> &[u32] {
+    &self.key
   }
 }
