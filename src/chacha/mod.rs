@@ -40,10 +40,10 @@ pub fn chacha20_block(key: &Key, nonce: &[u32], block_count: u32) -> Vec<u32> {
 pub fn setup_state(key: &Key, nonce: &[u32], block_count: u32) -> Vec<u32> {
   let mut state: Vec<u32> = Vec::with_capacity(16);
 
-  state.push(0x61707865_u32);
-  state.push(0x3320646e_u32);
-  state.push(0x79622d32_u32);
-  state.push(0x6b206574_u32);
+  state.push(0x6170_7865_u32);
+  state.push(0x3320_646e_u32);
+  state.push(0x7962_2d32_u32);
+  state.push(0x6b20_6574_u32);
 
   state.extend_from_slice(key.key());
   state.push(block_count);
@@ -54,8 +54,8 @@ pub fn setup_state(key: &Key, nonce: &[u32], block_count: u32) -> Vec<u32> {
 
 /// Apply 20 rounds of chacha.
 #[inline]
-pub fn rot20(state: &Vec<u32>) -> Vec<u32> {
-  let mut working_state = state.clone();
+pub fn rot20(state: &[u32]) -> Vec<u32> {
+  let mut working_state = state.to_owned();
   for _ in 0..10 {
     qround(&mut working_state, 0, 4, 8, 12);
     qround(&mut working_state, 1, 5, 9, 13);
@@ -70,7 +70,7 @@ pub fn rot20(state: &Vec<u32>) -> Vec<u32> {
 }
 
 /// Rotate the internal state by a quarter round.
-pub fn qround(state: &mut Vec<u32>, a: u16, b: u16, c: u16, d: u16) {
+pub fn qround(state: &mut [u32], a: u16, b: u16, c: u16, d: u16) {
   let a = a as usize;
   let b = b as usize;
   let c = c as usize;
